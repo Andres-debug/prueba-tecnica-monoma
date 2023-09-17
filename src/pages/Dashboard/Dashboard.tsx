@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import {NavBar} from '../../components/navBar/navBar';
 import {PokemonCard} from '../../components/pokemonCard/pokemonCard';
 import {Pagination} from '../../components/pagination/pagination';
+import { PokemonModal } from '../../components/pokemonModal/pokemonModal';
 
 export const Dashboard: React.FC = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   useEffect(() => {
     const fetchPokemonList = async () => {
@@ -26,9 +28,16 @@ export const Dashboard: React.FC = () => {
     fetchPokemonList();
   }, [currentPage]);
 
+  const handlePokemonClick = (pokemon:any) => {
+    setSelectedPokemon(pokemon);
+  };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedPokemon(null);
   };
 
   return (
@@ -41,10 +50,14 @@ export const Dashboard: React.FC = () => {
               key={index}
               name={pokemon.name}
               imageUrl={`https://img.pokemondb.net/sprites/home/normal/${pokemon.name}.png`}
+              onClick={() => handlePokemonClick(pokemon)}
             />
           ))}
         </div>
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+      {selectedPokemon && (
+        <PokemonModal pokemon={selectedPokemon} onClose={handleCloseModal} />
+      )}
       </div>
     </div>
   );
