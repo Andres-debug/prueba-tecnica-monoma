@@ -1,4 +1,4 @@
-import { Dashnoard } from "../../pages/Dashboard/Dashboard";
+import { Dashboard } from "../../pages/Dashboard/Dashboard";
 import { Login } from "../../pages/Login/LoginPage";
 
 const customRoutes = [
@@ -9,7 +9,7 @@ const customRoutes = [
   },
   {
     path: "/dashboard",
-    component: Dashnoard,
+    component: Dashboard,
     isPrivated: false,
   },
 
