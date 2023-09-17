@@ -56,7 +56,7 @@ export const Dashboard: React.FC = () => {
         </div>
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       {selectedPokemon && (
-        <PokemonModal pokemon={selectedPokemon} onClose={handleCloseModal} />
+        <PokemonModal pokemon={selectedPokemon} onClose={handleCloseModal} modalIsOpen={true} />
       )}
       </div>
     </div>
